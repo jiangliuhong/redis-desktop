@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-container>
+      <el-header>Redis-Desktop</el-header>
+      <el-container>
+        <el-aside :width="asideWidth">
+          <asideIndex></asideIndex>
+        </el-aside>
+        <el-container>
+          <el-main>Main</el-main>
+          <el-footer>Footer</el-footer>
+        </el-container>
+      </el-container>
+    </el-container>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import asideIndex from "./pages/aside/index.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    asideIndex
+  },
+  data() {
+    return {
+      asideWidth: "400px"
+    };
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+@import "./css/index.css";
 </style>
