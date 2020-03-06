@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>Redis-Desktop</el-header>
+      <el-header>
+        Redis-Desktop
+        <el-button type="text" @click="testRedis">测试Redis</el-button>
+      </el-header>
       <el-container>
         <el-aside :width="asideWidth">
           <asideIndex></asideIndex>
@@ -16,6 +19,7 @@
 </template>
 <script>
 import asideIndex from "./pages/aside/index.vue";
+import redisUtil from "./js/utils/redis";
 export default {
   name: "App",
   components: {
@@ -23,8 +27,16 @@ export default {
   },
   data() {
     return {
-      asideWidth: "400px"
+      asideWidth: "40%"
     };
+  },
+  methods: {
+    testRedis() {
+      redisUtil.createClient();
+      redisUtil.getKey("test2").then(function(res) {
+        console.log(res);
+      });
+    }
   }
 };
 </script>
