@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         Redis-Desktop
-        <el-button type="text" @click="testRedis">测试Redis</el-button>
+        <el-button type="text" @click="clientRedis">连接Redis</el-button>
       </el-header>
       <el-container>
         <el-aside :width="asideWidth">
@@ -19,7 +19,8 @@
 </template>
 <script>
 import asideIndex from "./pages/aside/index.vue";
-import redisUtil from "./js/utils/redis";
+import RedisClient from "./js/app/RedisClient";
+//import redisUtil from "./js/utils/redisUtils";
 export default {
   name: "App",
   components: {
@@ -31,9 +32,14 @@ export default {
     };
   },
   methods: {
-    testRedis() {
-      redisUtil.createClient();
-      redisUtil.getKey("test2").then(function(res) {
+    clientRedis() {
+      const config = {
+        url: "localhost",
+        port: "6379",
+        password: "123456"
+      };
+      const rc = new RedisClient(config);
+      rc.getKey("test2").then(function(res) {
         console.log(res);
       });
     }
